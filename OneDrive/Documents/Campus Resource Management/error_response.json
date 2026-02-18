@@ -1,0 +1,1 @@
+﻿{"success":false,"message":"An unexpected error occurred","error":"Name for argument of type [com.campus.crm.model.Resource$ResourceType] not specified, and parameter name information not available via reflection. Ensure that the compiler uses the '-parameters' flag.","timestamp":"2026-02-18T12:35:31.8947815"}

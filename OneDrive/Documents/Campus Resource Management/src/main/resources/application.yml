@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: campus-crm
+  datasource:
+    url: jdbc:postgresql://aws-1-ap-south-1.pooler.supabase.com:5432/postgres?sslmode=require
+    username: postgres.lgoyckhyqfqcbbdufljh
+    password: usermanagementsupabase
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
+  
+  # Mail Configuration (Mock)
+  mail:
+    host: localhost
+    port: 1025
+    username: null
+    password: null
+
+# JWT Configuration
+jwt:
+  secret: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+  expiration: 86400000 # 1 day in ms
+
+# Logging
+logging:
+  level:
+    root: INFO
+    com.campus.crm: DEBUG
+    org.springframework.web: INFO
+    org.hibernate.SQL: DEBUG
+
+server:
+  port: 8080
+  error:
+    include-message: always

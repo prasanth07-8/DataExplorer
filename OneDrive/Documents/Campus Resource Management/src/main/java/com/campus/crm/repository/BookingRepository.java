@@ -1,0 +1,32 @@
+package com.campus.crm.repository;
+
+import com.campus.crm.model.Booking;
+import com.campus.crm.model.Booking.BookingStatus;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.List;
+import java.util.UUID;
+
+@Repository
+public interface BookingRepository extends JpaRepository<Booking, Long> {
+
+        Page<Booking> findByUserId(Long userId, Pageable pageable);
+
+        Page<Booking> findByResourceId(Long resourceId, Pageable pageable);
+
+        @Query("SELECT b FROM Booking b WHERE b.resource.id = :resourceId AND b.bookingDate = :date AND b.status IN :statuses "
+                        +
+                        "AND ((b.startTime < :endTime AND b.endTime > :startTime))")
+        List<Booking> findConflictingBookings(@Param("resourceId") Long resourceId,
+                        @Param("date") LocalDate date,
+                        @Param("startTime") LocalTime startTime,
+                        @Param("endTime") LocalTime endTime,
+                        @Param("statuses") List<BookingStatus> statuses);
+}
